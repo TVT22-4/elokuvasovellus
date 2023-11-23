@@ -1,6 +1,8 @@
 # Elokuvasovellus
 
-<img width="700" alt="er" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/e8467ec3-685b-4e8b-9fb8-0dfdaeea5211">
+
+<img width="750" alt="er" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/ed0b9e7c-aca0-416c-8164-f9bbfdbec808">
+
 
 
 
