@@ -3,7 +3,7 @@ const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 const bcrypt = require('bcrypt');
 
-const {createUser, getUsers, deleteUsers} = require('../postgre/user');
+const {createUser, getUsers, deleteUsers, getUsersGroups} = require('../postgre/user');
 
 router.get('/', async (req, res) => {
 
@@ -37,13 +37,25 @@ router.delete('/:username', upload.none() , async (req,res) => {
     const usernameToDelete = req.params.username;
 
     try {
-        deleteUsers(usernameToDelete)
+        await deleteUsers(usernameToDelete)
         res.end();
     } catch (error) {
         console.log(error);
         res.json({error: error.message}).status(500);
     }
 
+});
+
+router.get('/user/:username/groups', async (req, res) => {
+    const username = req.params.username;
+
+    try {
+        const userGroups = await getUsersGroups(username);
+        res.json(userGroups);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 module.exports = router;
