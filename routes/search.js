@@ -4,7 +4,7 @@ const upload = multer({ dest: 'upload/' });
 const axios = require('axios');
 
 // accessToken
-const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMTQzNjc3MTM3MTNiN2I1NmY3YTIyZThkNmQ1YmRjNyIsInN1YiI6IjY1NmVlMzg0M2RjMzEzMDBlMWVmMzM0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FxVZGdEi1hngr_d0EsAsEixlNo_V6_5skE1hNZeHwXs';
+const accessToken = 'process.env.ACCESS_TOKEN';
 
 router.get('/search', upload.none(), async function (req, res) {
     const { title, genre, type } = req.query;
