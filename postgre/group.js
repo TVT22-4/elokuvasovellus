@@ -8,6 +8,9 @@ const sql ={
     DELETE_GROUP: 'DELETE FROM groups where idgroup = $1',
     ADD_USER: 'INSERT INTO group_users (username, idgroup) VALUES ($1, $2)',
     DELETE_USER: 'DELETE FROM group_users WHERE username = $1',
+    ADD_NEWS: 'INSERT INTO group_page (groupid, area, categoryid, eventid) VALUES ($1, $2, $3, $4)',
+    GET_NEWS: 'SELECT * FROM group_page WHERE idgroup = $1',
+    DELETE_NEWS: 'DELETE FROM group_page where materialid = $1'
     
 };
 
@@ -45,6 +48,17 @@ async function deleteUser(username) {
     await pgPool.query(sql.DELETE_USER, [username]);
 }
 
+async function addNews(idGroup,area,categoryID,eventID) {
+    await pgPool.query(sql.ADD_NEWS, [idGroup,area,categoryID,eventID]);
+}
 
+async function getNews(idGroup){
+    const result = await pgPool.query(sql.GET_NEWS, [idGroup]);
+    const rows = result.rows;
+    return rows;
+}
 
-module.exports = {createGroup, getUsers, getGroups, getGroup, deleteGroups, addUser, deleteUser};
+async function deleteNews(materialID) {
+    await pgPool.query(sql.DELETE_NEWS, [materialID]);
+}
+module.exports = {createGroup, getUsers, getGroups, getGroup, deleteGroups, addUser, deleteUser, addNews, getNews, deleteNews};
