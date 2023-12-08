@@ -3,9 +3,42 @@ const multer = require('multer');
 const upload = multer({dest:'upload/'});
 
 const {addPost, getPost, getUser, deletePost} = require('../postgre/custom_user');
+const { getMoviesFromTMDB , getSeriesFromTMDB} = require('../tmdb');
 
 
+//movies for the user page
+router.get('/custom_user/movies', async function(req, res) {
+    try {
+      
+      const accessToken = process.env.ACCESS_TOKEN;
+  
+      const movies = await getMoviesFromTMDB(accessToken);
+  
+      
+      res.json({ movies });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
+
+//series for the user page
+router.get('/custom_user/series', async function(req, res) {
+    try {
+        const accessToken = process.env.ACCESS_TOKEN;
+
+        const series = await getSeriesFromTMDB(accessToken);
+
+        res.json({series});
+    }catch (error){
+        console.error(error);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+
+
+//user adds movies to list etc
 router.post('/custom_user', upload.none(), async function(req, res){
 
    
@@ -26,13 +59,13 @@ router.get('/custom_user', async function(req,res){
     try {
     res.json(await getPost());
     } catch (error) {
-        res.status(500).json({error:error.message});
+      res.status(500).json({error:error.message});
     }
 
 });
 
 
-router.get('/:materialID', async function (req, res) {
+router.get('/custom_user/:materialID', async function (req, res) {
     const materialID = req.params.materialID;
 
     try {
@@ -48,7 +81,7 @@ router.get('/:materialID', async function (req, res) {
 });
 
 
-router.delete('/:materialID', upload.none(), async function (req,res){
+router.delete('/custom_user/:materialID', upload.none(), async function (req,res){
     const materialID = req.params.materialID;
 
     try {
