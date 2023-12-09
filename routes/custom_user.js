@@ -6,54 +6,50 @@ const {addPost, getPost, getUser, deletePost} = require('../postgre/custom_user'
 const { getMoviesFromTMDB , getSeriesFromTMDB} = require('../tmdb');
 
 
-//movies for the user page
-router.get('/custom_user/movies', async function(req, res) {
+//movies and series for the user page
+router.get('/custom_user/movies_and_series', async function(req, res) {
     try {
       
       const accessToken = process.env.ACCESS_TOKEN;
   
-      const movies = await getMoviesFromTMDB(accessToken);
-  
-      
-      res.json({ movies });
+      const popularMovies = await getMoviesFromTMDB(accessToken, {
+        sort_by: 'popularity.desc',
+      });
+
+      const topRatedMovies = await getMoviesFromTMDB (accessToken, {
+        sort_by: 'vote_average.desc',
+      });
+
+      const popularSeries = await getSeriesFromTMDB(accessToken, {
+        sort_by: 'popularity.desc',
+      });
+
+
+      res.json({ popularMovies,topRatedMovies, popularSeries });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
 
+//user adds movies to watchlist
+router.post('/custom_user/movies_and_series/watchlist', upload.none(), async function(req, res){
+   try{
 
-//series for the user page
-router.get('/custom_user/series', async function(req, res) {
-    try {
-        const accessToken = process.env.ACCESS_TOKEN;
-
-        const series = await getSeriesFromTMDB(accessToken);
-
-        res.json({series});
-    }catch (error){
-        console.error(error);
-        res.status(500).json({error: 'Internal Server Error'});
-    }
-});
-
-
-//user adds movies to list etc
-router.post('/custom_user', upload.none(), async function(req, res){
-
-   
     const userName = req.body.userName;
     const postType = req.body.postType;
     const targetId = req.body.targetId;
 
-    try {
-        await addPost (userName, postType, targetId);
-        res.status(201).end();
+    
+    await addPost (userName, postType, targetId);
+        res.status(201).json({message:'Added to watchlist successfully'});
     } catch (error){
         res.status(400).json({error: error.message});
     }
 });
 
+
+//gets all custom_users
 router.get('/custom_user', async function(req,res){
 
     try {
@@ -64,8 +60,8 @@ router.get('/custom_user', async function(req,res){
 
 });
 
-
-router.get('/custom_user/:materialID', async function (req, res) {
+//get user and watchlist with materialID
+router.get('/custom_user/movies_and_series/watchlist/:materialID', async function (req, res) {
     const materialID = req.params.materialID;
 
     try {
@@ -80,8 +76,8 @@ router.get('/custom_user/:materialID', async function (req, res) {
     }
 });
 
-
-router.delete('/custom_user/:materialID', upload.none(), async function (req,res){
+//delete post from watchlist
+router.delete('/custom_user/movies_and_series/watchlist/:materialID', upload.none(), async function (req,res){
     const materialID = req.params.materialID;
 
     try {
