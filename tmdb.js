@@ -1,12 +1,13 @@
 const axios = require('axios');
 
 //movies
-async function getMoviesFromTMDB(accessToken) {
+async function getMoviesFromTMDB(accessToken, options = {}) {
   try {
     const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
         params: {
             language: 'en-US',
             page:1,
+            ...options,
             
         },
         headers: {
@@ -14,7 +15,6 @@ async function getMoviesFromTMDB(accessToken) {
             accept: 'application/json',
         },
     });
-
     
     return response.data.results;
   } catch (error) {
@@ -23,12 +23,13 @@ async function getMoviesFromTMDB(accessToken) {
 }
 
 //series
-async function getSeriesFromTMDB(accessToken) {
+async function getSeriesFromTMDB(accessToken, options = {}) {
   try {
     const response = await axios.get('https://api.themoviedb.org/3/discover/tv' , {
       params: {
         language: 'en-US',
         page:1,
+        ...options,
       },
       headers: {
         Authorization: "Bearer "+ accessToken,
@@ -42,12 +43,7 @@ async function getSeriesFromTMDB(accessToken) {
   }
 }
 
-
-
-
-
 module.exports = {
   getMoviesFromTMDB,
   getSeriesFromTMDB,
-  
 };
