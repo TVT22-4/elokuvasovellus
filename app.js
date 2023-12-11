@@ -25,3 +25,5 @@ app.listen(PORT, function(){
 app.get('/', function(req,res){
     res.send('Home page');
 });
+
+module.exports = app;

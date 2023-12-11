@@ -93,7 +93,7 @@ router.delete('/group/:idGroup/users/:username', auth, upload.none() , async (re
 });
 
 
-async function fetchData(area, categoryID, eventID) {
+/*async function fetchData(area, categoryID, eventID) {
   try {
     const response = await axios.get(`https://www.finnkino.fi/xml/News/?area=${area}&categoryID=${categoryID}&eventID=${eventID}`);
 
@@ -108,7 +108,7 @@ async function fetchData(area, categoryID, eventID) {
   }
 }
 
-fetchData('1041', '', '123');
+fetchData('1041', '', '123');*/
 
 
 router.post('/group/:idGroup/news/add-news', auth, async (req, res) => {
