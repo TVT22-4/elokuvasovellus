@@ -1,9 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import { useContext, useState } from "react";
-import { LoginContext } from './components/Context';
+//import { useContext, useState } from "react";
+//import { LoginContext } from './components/Context';
 import { LoginPage } from './components/Login';
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { UserData } from './components/User';
+import RegisterForm  from './components/Register';
+import GroupList from './components/Group';
+import CreateGroup from './components/CreateGroup';
 
 function App() {
   return (
@@ -51,7 +54,7 @@ function Home(){
 function Register(){
   return(
     <div>
-
+      <RegisterForm />
     </div>
   )
 }
@@ -69,7 +72,9 @@ function Login(){
 function User(){
   return(
     <div>
-
+      <UserData />
+    
+      
     </div>
   )
 }
@@ -77,7 +82,8 @@ function User(){
 function Group(){
   return(
     <div>
-
+      <GroupList />
+      <CreateGroup />
     </div>
   )
 }

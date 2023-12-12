@@ -1,47 +1,35 @@
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react";
+import { LoginContext } from "./Context";
+import { jwtToken, userInfo } from "./Signals";
 import axios from "axios";
-import { jwtToken } from "./Signals";
-
 
 function LoginPage() {
-  return (
-    <div>
-      <UserInfo/>
-      <LoginForm/>
-    </div>
-  )
-}
 
-export default function LoginForm(){
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  function login(){
-      axios.post('http://localhost:3001/user/login', {username, password})
-          .then(resp => jwtToken.value = resp.data.jwtToken)
-          .catch(error => console.log(error.message))
+    return (
+      <div>
+        { jwtToken.value.length === 0 ? <LoginForm/> : 
+          <button onClick={() => jwtToken.value = ''}>Logout</button>}
+      </div>
+    );
+  }
+  function LoginForm() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+  
+    function login(){
+      axios.postForm('http://localhost:3001/user/login', {username,password})
+        .then(resp => jwtToken.value = resp.data.jwtToken )
+        .catch(error => console.log(error.response.data))
+    }
+  
+    return (
+      <div>
+        <input value={username} onChange={e => setUsername(e.target.value)} /><br />
+        <input value={password} onChange={e => setPassword(e.target.value)} /><br />
+        <button onClick={login}>Login</button>
+      </div>
+    );
   }
 
-  return(
-      <div>
-          {jwtToken.value.length !== 0 ? <h2>Logged in</h2> :
-          <div>
-              <h2>Login</h2>
-              <input onChange={e => setUsername(e.target.value)}/><br/>
-              <input onChange={e => setPassword(e.target.value)}/><br/>
-              <button onClick={login}>Login</button>
-          </div>
-      }
-      </div>
-  )
-}
 
-function UserInfo(){
-  return(
-    <div>
-      {jwtToken.value ? <h1>Logged in</h1> : <h1> </h1>}
-    </div>
-  )
-}
-  export {LoginPage};
+export {LoginPage};

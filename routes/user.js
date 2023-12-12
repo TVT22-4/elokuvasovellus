@@ -55,12 +55,13 @@ router.get('/', auth, async (req, res) => {
         res.status(401).json({error: error.message});
     }
 });
-
 router.get('/user/:username', auth, async (req, res) => {
 
     try {
         const username = res.locals.username;
-        res.json(await getUser(username));    
+        //res.status(200).json({username: username, personalData: "Some personal data"});
+        data = await getUser(username);
+        res.status(200).json(data);    
     } catch (error) {
         res.status(401).json({error: error.message});
     }

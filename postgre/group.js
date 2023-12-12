@@ -3,7 +3,7 @@ const pgPool = require('./connection');
 const sql ={
     CREATE_GROUP: 'INSERT INTO groups (groupname, description) VALUES ($1, $2)',
     GET_USERS: 'SELECT users.username FROM users JOIN groups_user ON users.username = groups_user.username WHERE groups_user.idgroup = $1',
-    GET_GROUPS: 'SELECT groupname FROM groups',
+    GET_GROUPS: 'SELECT idgroup, groupname, description FROM groups',
     GET_GROUP: 'SELECT * FROM groups WHERE idgroup = $1',
     DELETE_GROUP: 'DELETE FROM groups where idgroup = $1',
     ADD_USER: 'INSERT INTO group_users (username, idgroup) VALUES ($1, $2)',
@@ -27,7 +27,11 @@ async function getUsers(idGroup){
 async function getGroups(){
     const result = await pgPool.query(sql.GET_GROUPS);
     const rows = result.rows;
-    return rows;
+    return rows.map(groups => ({
+    idGroup: groups.idGroup,
+    groupname: groups.groupname,
+    description: groups.description,
+  }));
 }
 
 async function getGroup(idGroup){
