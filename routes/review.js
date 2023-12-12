@@ -1,11 +1,20 @@
 const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
+const axios = require('axios');
+require('dotenv').config();
+const {getMoviesFromTMDB} = require('../TMDB');
+const {addReview, getReviews, getReview, deleteReview} = require ('../postgre/reviews');
 
-const {addReview, getReviews} = require ('../postgre/reviews');
-
-router.get('/', async function(req, res){
+router.get('/all', async function(req, res){
     res.json(await getReviews());
+});
+
+router.get('/byid', async function(req, res){
+    const idreview = req.query.idreview;
+
+    console.log(idreview);
+    res.json(await getReview(idreview));
 });
 
 router.post('/', upload.none(), async function(req, res){
@@ -21,5 +30,34 @@ router.post('/', upload.none(), async function(req, res){
         res.json({error: error.message}).status(500);
     }
 });
+
+router.delete('/', async function(req, res){
+    const idreview = req.query.idreview;
+
+    try {
+        await deleteReview(idreview);
+        console.log('row removed');
+        res.end();
+    } catch (error) {
+        res.json({error: error.message}).status(500);
+    }
+});
+
+
+router.get('/custom_user/movies_and_series', async function(req, res) {
+    try {
+
+      const accessToken = process.env.ACCESS_TOKEN;
+
+      const popularMovies = await getMoviesFromTMDB(accessToken, {
+        sort_by: 'popularity.desc',
+      });
+
+      res.json({popularMovies});
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 module.exports = router;
