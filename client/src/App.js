@@ -7,6 +7,8 @@ import { UserData } from './components/User';
 import RegisterForm  from './components/Register';
 import GroupList from './components/Group';
 import CreateGroup from './components/CreateGroup';
+import { GroupPage } from './components/GroupPage';
+
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
         <Route path="/group" element={<Group />} />
+        <Route path="/group/:idGroup" element={<GroupPage />} />
         <Route path="/*" element={ <h3>Page not found</h3>} />
       </Routes>
     </div>
@@ -73,7 +76,6 @@ function User(){
   return(
     <div>
       <UserData />
-    
       
     </div>
   )
@@ -84,8 +86,11 @@ function Group(){
     <div>
       <GroupList />
       <CreateGroup />
+      
     </div>
   )
 }
+
+
 
 export default App;

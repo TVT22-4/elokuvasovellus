@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function GroupList () {
+const GroupList = () => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,10 +16,25 @@ export default function GroupList () {
         setLoading(false);
       }
     };
-
     fetchGroups();
   }, []);
 
+  const handleJoinGroup = async (idGroup) => {
+    try {
+      const token = sessionStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      console.log('Joining group with id:', idGroup);
+      await axios.post(`http://localhost:3001/group/group/${idGroup}/users/requests`, {}, config);
+    } catch (error) {
+      console.error("Error joining group:", error.message);
+    }
+  };
+  
+  
   return (
     <div>
       <h2>Group List</h2>
@@ -27,8 +42,11 @@ export default function GroupList () {
         <p>Loading...</p>
       ) : (
         <ul>
-          {groups.map((groups) => (
-            <li key={groups.idGroup}>{groups.groupname} : {groups.description}</li>
+          {groups.map((group) => (
+          <li key={group.idGroup}>
+          {group.groupname} : {group.description}
+           <button onClick={() => handleJoinGroup(group.idGroup)}>Join Group</button>
+          </li>
           ))}
         </ul>
       )}
@@ -36,6 +54,4 @@ export default function GroupList () {
   );
 };
 
-
-
-
+export default GroupList;

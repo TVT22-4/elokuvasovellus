@@ -35,8 +35,8 @@ async function getUser(username){
     return rows;
 }
 
-async function deleteUsers(usernameToDelete) {
-    await pgPool.query(sql.DELETE_USERS, [usernameToDelete]);
+async function deleteUsers(username) {
+    await pgPool.query(sql.DELETE_USERS, [username]);
 }
 
 async function getUsersGroups(username){
@@ -44,6 +44,5 @@ async function getUsersGroups(username){
     const rows = result.rows;
     return rows;
 }
-
 
 module.exports = {createUser, checkUsername, getUsers, getUser, deleteUsers, getUsersGroups};

@@ -14,9 +14,8 @@ export default function RegisterForm() {
       .then(resp => {
         console.log("Response:", resp);
   
-        // Check if resp is defined and resp.data is defined
         if (resp && resp.data) {
-          jwtToken.value = { token: resp.data.jwtToken, username }; // Change this line
+          jwtToken.value = { token: resp.data.jwtToken, username };
         } else {
           console.error("Unexpected response format. Response:", resp);
         }
@@ -29,7 +28,6 @@ export default function RegisterForm() {
         }
       });
   }
-  
   
   
   return (

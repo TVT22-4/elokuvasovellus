@@ -68,10 +68,11 @@ router.get('/user/:username', auth, async (req, res) => {
 });
 
 router.delete('/:username', auth, upload.none() , async (req,res) => {
-    const usernameToDelete = req.params.username;
+    const username = res.locals.username;
 
     try {
-        await deleteUsers(usernameToDelete)
+        console.log('Deleting user:', username);
+        await deleteUsers(username)
         res.end();
     } catch (error) {
         console.log(error);
