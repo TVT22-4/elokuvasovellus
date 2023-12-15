@@ -48,9 +48,8 @@ router.post('/custom_user/movies_and_series/watchlist', upload.none(), async fun
     }
 });
 
-
-//gets all custom_users
-router.get('/custom_user', async function(req,res){
+//get all users 
+router.get('/custom_user/movies_and_series/watchlist', async function(req,res){
 
     try {
     res.json(await getPost());
@@ -60,12 +59,13 @@ router.get('/custom_user', async function(req,res){
 
 });
 
+
 //get user and watchlist with materialID
-router.get('/custom_user/movies_and_series/watchlist/:materialID', async function (req, res) {
-    const materialID = req.params.materialID;
+router.get('/custom_user/movies_and_series/watchlist/:userName', async function (req, res) {
+  const userName = req.params.userName;
 
     try {
-        const user = await getUser(materialID);
+        const user = await getUser(userName);
         if (user.length === 0) {
             res.status(404).json({ error: 'User not found' });
         } else {
@@ -77,16 +77,17 @@ router.get('/custom_user/movies_and_series/watchlist/:materialID', async functio
 });
 
 //delete post from watchlist
-router.delete('/custom_user/movies_and_series/watchlist/:materialID', upload.none(), async function (req,res){
-    const materialID = req.params.materialID;
+router.delete('/custom_user/movies_and_series/watchlist/:materialID/:userName', upload.none(), async function (req,res){
+  const {materialID, userName} = req.params;
 
-    try {
-        await deletePost(materialID)
-        res.end();
-    }catch (error) {
-        console.log(error);
-        res.status(204).json({error: error.message});
-    }
+  try {
+      await deletePost(materialID, userName)
+      res.end();
+  }catch (error) {
+      console.log(error);
+      res.status(204).json({error: error.message});
+  }
 });
+
 
 module.exports = router;
