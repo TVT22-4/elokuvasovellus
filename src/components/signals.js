@@ -25,13 +25,3 @@ effect(()=>{
         userInfo.value = null;
     }
 });
-
-/*effect(()=>{
-    if(apiKey.length !== 0){
-        axios.get('https://api.themoviedb.org/3/movie/popular', {headers: {Authorization: "Bearer " + apiKey}})
-            .then(resp => movieInfo.value = resp.data)
-            .catch(error => console.log(error.message))
-    }else{
-        movieInfo.value = null;
-    }
-});*/
