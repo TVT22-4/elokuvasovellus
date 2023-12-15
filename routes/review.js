@@ -27,7 +27,7 @@ router.post('/', upload.none(), async function(req, res){
         await addReview(username, revtext, rating, targetid);
         res.end();
     } catch (error) {
-        res.json({error: error.message}).status(500);
+        res.json({error: error.message}).status(401);
     }
 });
 
@@ -56,7 +56,7 @@ router.get('/custom_user/movies_and_series', async function(req, res) {
       res.json({popularMovies});
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: error.message});
     }
   });
 
