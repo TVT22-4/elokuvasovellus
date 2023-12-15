@@ -6,3 +6,6 @@ Here is a pdf with screenshots of the documentation.
 
 Vilma:
 Link for stoplight REST-ducmentation: https://documenter.getpostman.com/view/26654169/2s9YkkgiY6
+
+Laura:
+Link for stoplight REST-documentation: https://documenter.getpostman.com/view/25804451/2s9Ye8fEzu
