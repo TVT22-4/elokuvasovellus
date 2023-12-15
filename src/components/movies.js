@@ -14,21 +14,6 @@ export default function Movies(){
             .catch(error => {setError(error); setLoading(false);});
     },[]);
 
-    /*return(
-      <div>
-        <ul>
-          {
-            movies.popularMovies.map(m =>(
-              <li key={m.id}>
-                {m.title} {m.id} {m.release_date} {m.overview}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    )*/
-
-    
     return(
         <div>
             {loading && <p>Loading...</p>}
