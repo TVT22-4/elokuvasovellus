@@ -1,3 +1,3 @@
 # elokuvasovellus
 
-![image](https://github.com/TVT22-4/elokuvasovellus/assets/102577828/6b313892-a20d-4e34-98a6-987cba7438f7)
+Stoplight REST-documentation https://documenter.getpostman.com/view/25804451/2s9Ye8fEzu
