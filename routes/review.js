@@ -3,8 +3,9 @@ const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 const axios = require('axios');
 require('dotenv').config();
-const {getMoviesFromTMDB} = require('../TMDB');
+const {getPopularMoviesFromTMDB} = require('../tmdb');
 const {addReview, getReviews, getReview, deleteReview} = require ('../postgre/reviews');
+const {auth} = require('../auth/auth');
 
 router.get('/all', async function(req, res){
     res.json(await getReviews());
@@ -17,7 +18,7 @@ router.get('/byid', async function(req, res){
     res.json(await getReview(idreview));
 });
 
-router.post('/', upload.none(), async function(req, res){
+router.post('/', auth, upload.none(), async function(req, res){
     const username = req.body.username;
     const revtext = req.body.revtext;
     const rating = req.body.rating;
@@ -44,12 +45,12 @@ router.delete('/', async function(req, res){
 });
 
 
-router.get('/custom_user/movies_and_series', async function(req, res) {
+router.get('/movies', async function(req, res) {
     try {
 
       const accessToken = process.env.ACCESS_TOKEN;
 
-      const popularMovies = await getMoviesFromTMDB(accessToken, {
+      const popularMovies = await getPopularMoviesFromTMDB(accessToken, {
         sort_by: 'popularity.desc',
       });
 
@@ -61,3 +62,4 @@ router.get('/custom_user/movies_and_series', async function(req, res) {
   });
 
 module.exports = router;
+

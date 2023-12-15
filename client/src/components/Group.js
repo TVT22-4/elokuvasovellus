@@ -37,7 +37,8 @@ export default function GroupList() {
   
   
   return (
-    <div>
+    <body>
+    <div className='grouplist'>
       <h2>Group List</h2>
       {loading ? (
         <p>Loading...</p>
@@ -45,13 +46,14 @@ export default function GroupList() {
         <ul>
           {groups.map((group) => (
             <li key={group.idGroup}>
-              <Link to={`/group/${group.idGroup}`}>{group.groupname}</Link> <br /> {group.description}<br />
+              <Link to={`/group/${group.idGroup}`}className="styled-link">{group.groupname}</Link> <br /> {group.description}<br />
                <button onClick={() => handleJoinGroup(group.idGroup)}>Join Group</button><br /><br />
             </li>
           ))}
         </ul>
       )}
     </div>
+    </body>
   );
 }
 

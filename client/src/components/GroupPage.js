@@ -131,6 +131,7 @@ export default function GroupPage() {
   };
 
   return (
+    <body>
     <div>
       {!isCurrentUserMember && (
         <h2>You are not authorized for this page. Please join the group to access its content.</h2>
@@ -139,8 +140,8 @@ export default function GroupPage() {
         <h1>Group Page</h1>
       )}
       {isCurrentUserOwner && (
-        <div>
-          <h2>Join Requests</h2>
+        <div className='glist'>
+          <h3>Join Requests</h3>
           <ul>
             {joinRequests.map((request) => (
               <li key={request.id}>
@@ -150,7 +151,7 @@ export default function GroupPage() {
               </li>
             ))}
           </ul>
-            <h2>Group Users</h2>
+            <h3>Group Users</h3>
             <ul>
               {groupUsers.map((user) => (
                 <li key={user.username}>
@@ -164,5 +165,6 @@ export default function GroupPage() {
           </div>
         )}
     </div>
+    </body>
   );
 }

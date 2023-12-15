@@ -19,6 +19,7 @@ export default function CreateGroup() {
   };
 
   return (
+    <body>
     <div className="form">
         <h2>Create group</h2>
         <form>
@@ -30,5 +31,6 @@ export default function CreateGroup() {
       <button onClick={handleCreateGroup}>Create Group</button>
       </form>
     </div>
+    </body>
   );
 }

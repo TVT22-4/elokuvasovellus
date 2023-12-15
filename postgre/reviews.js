@@ -1,8 +1,8 @@
-const pgPool = require('./connections');
+const pgPool = require('./connection');
 
 const sql = {
     INSERT_REVIEW: 'INSERT INTO review (username, revtext, rating, targetid) VALUES ($1, $2, $3, $4)',
-    GET_REVIEWS: 'SELECT username, revtext, rating FROM review',
+    GET_REVIEWS: 'SELECT username, revtext, rating, targetid, idreview FROM review',
     GET_REVIEW: 'SELECT username, revtext, rating FROM review WHERE idreview = $1',
     DELETE_REVIEW: 'DELETE FROM review WHERE idreview = $1'
 }

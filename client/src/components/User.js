@@ -39,6 +39,7 @@ const handleDeleteUser = async () => {
 };
 
   return (
+    <body>
     <div>
       {userInfo.value === null ? (
         <h2>No authorized personal data</h2>
@@ -48,11 +49,12 @@ const handleDeleteUser = async () => {
           <p>Username: {userInfo.value[0].username}</p>
           <p>First Name: {userInfo.value[0].fname}</p>
           <p>Last Name: {userInfo.value[0].lname}</p>
-          <p>Email: {userInfo.value[0].email}</p>
-          <button onClick={() => (jwtToken.value = '')}>Logout</button>
+          <p>Email: {userInfo.value[0].email}</p><br />
+          <button onClick={() => (jwtToken.value = '')}>Logout</button><br /><br />
           <button onClick={handleDeleteUser}>Delete User</button>
         </div>
       )}
     </div>
+    </body>
   );
 }

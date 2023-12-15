@@ -44,10 +44,11 @@ export default function FetchNews(){
   
 
   return (
+    <body>
     <div>
       {isCurrentUserMember && (
-        <div>
-          <h2>Group News</h2>
+        <div className='newslist'>
+          <h3>Group News</h3>
           <ul>
             {fetchedNews.length > 0 ? (
               fetchedNews.map((item) => (
@@ -62,6 +63,7 @@ export default function FetchNews(){
         </div>
       )}
     </div>
+    </body>
   );
 };  
 
