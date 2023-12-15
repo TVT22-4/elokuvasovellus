@@ -45,20 +45,23 @@ export default function FetchNews(){
 
   return (
     <div>
-      <h2>Group News</h2>
-      <ul>
-        {fetchedNews.length > 0 ? (
-          fetchedNews.map((item) => (
-            <li key={item.idgroup}>
-              {item.title} - {item.publishdate}
-            </li>
-          ))
-        ) : (
-          <li>No news</li>
-        )}
-      </ul>
+      {isCurrentUserMember && (
+        <div>
+          <h2>Group News</h2>
+          <ul>
+            {fetchedNews.length > 0 ? (
+              fetchedNews.map((item) => (
+                <li key={item.idgroup}>
+                  {item.title} - {item.publishdate}
+                </li>
+              ))
+            ) : (
+              <li>No news</li>
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
-};
-
+};  
 

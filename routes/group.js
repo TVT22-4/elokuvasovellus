@@ -144,7 +144,7 @@ router.post('/group/:idGroup/users/requests', auth, async (req, res) => {
       res.end();
     } catch (error) {
       console.error('Error creating join request:', error.message);
-      res.status(500).json({ error: error.message });
+      res.status(401).json({ error: error.message });
     }
 });
   
@@ -156,7 +156,7 @@ router.post('/group/:idGroup/users/requests', auth, async (req, res) => {
       res.json(joinRequests);
     } catch (error) {
       console.error('Error getting join requests:', error.message);
-      res.status(500).json({ error: error.message });
+      res.status(401).json({ error: error.message });
     }
 });
   
@@ -169,7 +169,7 @@ router.post('/group/:idGroup/users/requests/:requestID', auth, authorizeGroup, a
       res.end();
   } catch (error) {
       console.error('Error accepting join request:', error.message);
-      res.status(500).json({ error: error.message });
+      res.status(401).json({ error: error.message });
   }
 });
 
@@ -183,7 +183,7 @@ router.delete('/group/:idGroup/users/requests/:requestID', auth, authorizeGroup,
         res.end();
     } catch (error) {
         console.error('Error deleting join request:', error.message);
-        res.status(500).json({ error: error.message });
+        res.status(403).json({ error: error.message });
     }
 });
 
@@ -193,10 +193,11 @@ router.get('/group/:idGroup/checkOwner', auth, authorizeGroup, (req, res) => {
 
     try {
       const isOwner = isGroupOwner(idGroup, username);
+      console.log(isOwner)
       res.json({ isOwner });
     } catch (error) {
       console.error('Error checking group ownership:', error.message);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(401).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -209,7 +210,7 @@ router.get('/group/:idGroup/checkMember', auth, authorizeGroup, (req, res) => {
     res.json({ isMember });
   } catch (error) {
     console.error('Error checking group ownership:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(401).json({ error: 'Internal Server Error' });
   }
 });
   

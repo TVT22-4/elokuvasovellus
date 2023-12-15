@@ -120,13 +120,13 @@ async function deleteJoinRequest(requestId) {
 
 async function isGroupMember(idGroup, username) {
   try {
-      const result = await pgPool.query('SELECT 1 FROM group_users WHERE idgroup = $1 AND username = $2', [idGroup, username]);
-      return result.rows.length > 0;
-    } catch (error) {
-      console.error('Error checking group membership:', error.message);
-      throw error;
-    }
+    const result = await pgPool.query('SELECT 1 FROM group_users WHERE idgroup = $1 AND username = $2', [idGroup, username]);
+    return result.rows.length > 0;
+  } catch (error) {
+    console.error('Error checking group membership:', error.message);
+    throw error;
   }
+}
  
 async function isGroupOwner(idGroup, username) {
   try {
@@ -134,7 +134,7 @@ async function isGroupOwner(idGroup, username) {
       return result.rows.length > 0;
     } catch (error) {
       console.error('Error checking group ownership:', error.message);
-      throw error;
+      //throw error;
     }
 }
 

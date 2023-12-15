@@ -22,6 +22,7 @@ router.post('/register', upload.none() , async (req,res) => {
     try {
         await createUser(username, fname,lname,email,password);
         const token = createToken(username);
+        res.jwtToken = token;
         res.status(200).json({jwtToken: token});
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -38,6 +39,7 @@ router.post('/login', upload.none(), async (req,res) => {
         const isCorrect = await bcrypt.compare(password, passwordHash);
         if(isCorrect){
             const token = jwt.sign({username: username}, process.env.JWT_SECRET_KEY);
+            res.jwtToken = token;
             res.status(200).json({jwtToken:token});
         }else{
             res.status(401).json({error: 'Invalid password'});
