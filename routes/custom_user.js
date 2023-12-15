@@ -25,7 +25,7 @@ router.get('/custom_user/movies_and_series', async function(req, res) {
       });
 
 
-      res.json({ popularMovies,topRatedMovies, popularSeries });
+      res.status(200).json({popularMovies,topRatedMovies, popularSeries });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -52,7 +52,7 @@ router.post('/custom_user/movies_and_series/watchlist', upload.none(), async fun
 router.get('/custom_user/movies_and_series/watchlist', async function(req,res){
 
     try {
-    res.json(await getPost());
+    res.status(200).json(await getPost());
     } catch (error) {
       res.status(500).json({error:error.message});
     }
