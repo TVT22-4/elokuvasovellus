@@ -12,14 +12,6 @@ export default function Reviews(){
             .catch(error => console.log(error.message));
     },[]);
 
-    /*return(
-      <div>
-        {
-          reviews.map(r => <ReviewInfo username = {r.username} revtext = {r.revtext} rating = {r.rating} moid = {r.targetid} reid = {r.idreview}/>)
-        }
-      </div>
-    );*/
-
         return(
           <div>
             <ul>
