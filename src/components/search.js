@@ -24,40 +24,36 @@ export default function Search() {
         }
     };
 
-    //movies and series occur before the user clicks button
-   /* useEffect(() => {
-        if (searchQuery.trim() !== '') {
-            handleSearch();
-        }
-     }, [searchQuery]);
-*/
-    return (
-        <div>
-            <input
-                type="text"
-                placeholder="Search for movies and series"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button onClick={handleSearch}>Search</button>
-
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search for movies and series"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}/>
+            
+          <button onClick={handleSearch}>Search</button>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
             {searchResults && (
-                <div>
-                     
-                    <h2>Search Results</h2>
-                    {searchResults.map((result) => (
-                        <div key={result.targetId}>
-                            <p>Title: {result.title}</p>
-                            <p>Type: {result.type}</p>
-                            <p>Id: {result.targetId}</p>
-                            
-                        </div>
-                    ))}
-                </div>
-            )}
+
+        <div>
+          <h2>Search Results</h2>
+          {searchResults.map((result) => (
+            <div key={result.targetId}>
+
+              {/* Displaying movie or series image */}
+              {result.poster_path && (
+                <img src={`https://image.tmdb.org/t/p/w300${result.poster_path}`} alt={result.title}/>)}
+                <p>Title: {result.title}</p>
+                <p>Type: {result.type}</p>
+                <p>Id: {result.targetId}</p>
+            </div>
+            ))}
         </div>
-    );
-}
+        )}
+     </div>
+)}
+
+
 
