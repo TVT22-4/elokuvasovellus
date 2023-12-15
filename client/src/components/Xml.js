@@ -84,10 +84,11 @@ export default function NewsFin() {
   };
 
   return (
+    <body>
     <div>
       {isCurrentUserMember && (
-        <div>
-          <h2>Finnkino News</h2>
+        <div className='fin'>
+          <h3>Finnkino News</h3>
           <button onClick={handleOpenModal}>Add Finnkino News</button>
           <ul>
           {Array.isArray(fnews) && fnews.length > 0 ? (
@@ -118,6 +119,7 @@ export default function NewsFin() {
         </div>
       )}
     </div>
+    </body>
   );
 }
 

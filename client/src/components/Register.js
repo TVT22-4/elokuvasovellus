@@ -41,6 +41,7 @@ export default function RegisterForm() {
   }
 
   return (
+    <body>
     <div className="form">
       <h2>Create account</h2>
       <form>
@@ -53,7 +54,7 @@ export default function RegisterForm() {
         <p>Email</p>
         <input value={email} onChange={e => setEmail(e.target.value)} /><br />
         <p>Password</p>
-        <input value={password} onChange={e => setPassword(e.target.value)} /><br />
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} /><br />
         <br />
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <button type="button" onClick={register}>
@@ -61,5 +62,6 @@ export default function RegisterForm() {
         </button>
       </form>
     </div>
+    </body>
   );
 }

@@ -37,6 +37,7 @@ function LoginForm() {
   }
 
   return (
+    <body>
     <div>
       <h2>Login</h2>
       <input value={username} onChange={e => setUsername(e.target.value)} /><br />
@@ -44,6 +45,7 @@ function LoginForm() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button onClick={login}>Login</button>
     </div>
+    </body>
   );
 }
 
