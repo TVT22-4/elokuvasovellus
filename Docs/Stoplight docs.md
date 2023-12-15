@@ -9,3 +9,6 @@ Link for stoplight REST-ducmentation: https://documenter.getpostman.com/view/266
 
 Laura:
 Link for stoplight REST-documentation: https://documenter.getpostman.com/view/25804451/2s9Ye8fEzu
+
+Here is pdf with screenshots of the documentation:
+[Stoplight REST.pdf](https://github.com/TVT22-4/elokuvasovellus/files/13685144/Stoplight.REST.pdf)
