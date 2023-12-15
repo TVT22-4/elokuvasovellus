@@ -22,8 +22,4 @@ app.listen(PORT, function(){
     console.log('Server running on port ' + PORT)
 } );
 
-app.get('/', function(req,res){
-    res.send('Home page');
-});
-
 module.exports = app;

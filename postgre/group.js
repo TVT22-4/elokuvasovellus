@@ -8,8 +8,8 @@ const sql ={
     DELETE_GROUP: 'DELETE FROM groups where idgroup = $1',
     ADD_USER: 'INSERT INTO group_users (username, idgroup) VALUES ($1, $2)',
     DELETE_USER: 'DELETE FROM group_users WHERE username = $1 AND idgroup = $2 AND EXISTS (SELECT 1 FROM groups WHERE idgroup = $2 AND creator_username = $3)',
-    ADD_NEWS: 'INSERT INTO group_page (groupid, area, categoryid, eventid) VALUES ($1, $2, $3, $4)',
-    GET_NEWS: 'SELECT * FROM group_page WHERE idgroup = $1',
+    ADD_NEWS: 'INSERT INTO group_page (idgroup, title, publishdate) VALUES ($1, $2, $3)',
+    GET_NEWS: 'SELECT idgroup, title, publishdate FROM group_page WHERE idgroup = $1',
     DELETE_NEWS: 'DELETE FROM group_page where materialid = $1',
     CREATE_JOIN_REQUEST: 'INSERT INTO join_requests (idgroup, username) VALUES ($1, $2)',
     GET_JOIN_REQUESTS: 'SELECT * FROM join_requests WHERE idgroup = $1',
@@ -74,8 +74,8 @@ async function deleteUser(username, idGroup, creator_username) {
   await pgPool.query(sql.DELETE_USER, [username, idGroup, creator_username]);
 }
   
-async function addNews(idGroup,area,categoryID,eventID) {
-    await pgPool.query(sql.ADD_NEWS, [idGroup,area,categoryID,eventID]);
+async function addNews(idGroup, title, publishDate) {
+    await pgPool.query(sql.ADD_NEWS, [idGroup, title, publishDate]);
 }
 
 async function getNews(idGroup){

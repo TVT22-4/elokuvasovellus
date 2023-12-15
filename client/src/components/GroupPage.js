@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-const GroupPage = ({ userIsOwner }) => {
+export default function GroupPage(){
   const { idGroup } = useParams();
   const [joinRequests, setJoinRequests] = useState([]);
   const [groupUsers, setGroupUsers] = useState([]);
@@ -14,159 +14,157 @@ const GroupPage = ({ userIsOwner }) => {
     fetchGroupUsers();
     checkIfUserIsOwner();
     checkIfUserIsMember();
-  }, [idGroup, userIsOwner]);
+  }, [idGroup]);
 
-  const fetchJoinRequests = async () => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+const fetchJoinRequests = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/users/requests`, config);
+    const uniqueUserRequests = Array.from(new Set(response.data.map(request => request.username)))
+      .map(username => response.data.find(request => request.username === username));
+
+    setJoinRequests(uniqueUserRequests);
+  } catch (error) {
+    console.error('Error fetching join requests:', error.message);
+  }
+};
   
-      const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/users/requests`, config);
-      const uniqueUserRequests = Array.from(new Set(response.data.map(request => request.username)))
-        .map(username => response.data.find(request => request.username === username));
-  
-      setJoinRequests(uniqueUserRequests);
-    } catch (error) {
-      console.error('Error fetching join requests:', error.message);
-    }
-  };
-  
 
-  const handleAcceptRequest = async (requestId) => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+const handleAcceptRequest = async (requestId) => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-      await axios.post(`http://localhost:3001/group/group/${idGroup}/users/requests/${requestId}`, null, config);
+    await axios.post(`http://localhost:3001/group/group/${idGroup}/users/requests/${requestId}`, null, config);
 
-      setJoinRequests((prevJoinRequests) =>
-        prevJoinRequests.filter((request) => request.id !== requestId)
-      );
-    } catch (error) {
-      console.error('Error accepting join request:', error);
-    }
-  };
+    setJoinRequests((prevJoinRequests) =>
+      prevJoinRequests.filter((request) => request.id !== requestId)
+    );
+  } catch (error) {
+    console.error('Error accepting join request:', error);
+  }
+};
 
-  const handleDeleteRequest = async (requestId) => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+const handleDeleteRequest = async (requestId) => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-      await axios.delete(`http://localhost:3001/group/group/${idGroup}/users/requests/${requestId}`, config);
-      fetchJoinRequests();
-    } catch (error) {
-      console.error('Error deleting join request:', error.message);
-    }
-  };
+    await axios.delete(`http://localhost:3001/group/group/${idGroup}/users/requests/${requestId}`, config);
+    fetchJoinRequests();
+  } catch (error) {
+    console.error('Error deleting join request:', error.message);
+  }
+};
 
-  const fetchGroupUsers = async () => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/users`, config);
-      setGroupUsers(response.data);
-    } catch (error) {
-      console.error('Error fetching group users:', error.message);
-    }
-  };
+const fetchGroupUsers = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/users`, config);
+    setGroupUsers(response.data);
+  } catch (error) {
+    console.error('Error fetching group users:', error.message);
+  }
+};
 
-  const handleDeleteUser = async (username) => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      await axios.delete(`http://localhost:3001/group/group/${idGroup}/users/${username}`, config);
-      fetchGroupUsers();
-    } catch (error) {
-      console.error('Error deleting user:', error.message);
-    }
-  };
+const handleDeleteUser = async (username) => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await axios.delete(`http://localhost:3001/group/group/${idGroup}/users/${username}`, config);
+    fetchGroupUsers();
+  } catch (error) {
+    console.error('Error deleting user:', error.message);
+  }
+};
 
-  const checkIfUserIsOwner = async () => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/checkOwner`, config);
-      setIsCurrentUserOwner(response.data.isOwner);
-    } catch (error) {
-      console.error('Error checking group ownership:', error.message);
-    }
-  };
+const checkIfUserIsOwner = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/checkOwner`, config);
+    setIsCurrentUserOwner(response.data.isOwner);
+  } catch (error) {
+    console.error('Error checking group ownership:', error.message);
+  }
+};
 
-  const checkIfUserIsMember = async () => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/checkMember`, config);
-      setIsCurrentUserMember(response.data.isMember);
-    } catch (error) {
-      console.error('Error checking group membership:', error.message);
-    }
-  };
+const checkIfUserIsMember = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await axios.get(`http://localhost:3001/group/group/${idGroup}/checkMember`, config);
+    setIsCurrentUserMember(response.data.isMember);
+  } catch (error) {
+    console.error('Error checking group membership:', error.message);
+  }
+};
 
-  return (
-    <div>
-      {isCurrentUserMember && (
-        <>
-          <h1>Group Page</h1>
-          {isCurrentUserOwner && (
-            <div>
-              <h2>Join Requests</h2>
-              <ul>
-                {joinRequests.map((request) => (
-                  <li key={request.id}>
-                    {request.username} wants to join
-                    <button onClick={() => handleAcceptRequest(request.id)}>Accept</button>
-                    <button onClick={() => handleDeleteRequest(request.id)}>Reject</button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+return (
+  <div>
+    {isCurrentUserMember && (
+      <>
+        <h1>Group Page</h1>
+        {isCurrentUserOwner && (
           <div>
-            <h2>Group Users</h2>
+            <h2>Join Requests</h2>
             <ul>
-              {groupUsers.map((user) => (
-                <li key={user.username}>
-                  {user.username}
-                  {isCurrentUserOwner && (
-                    <button onClick={() => handleDeleteUser(user.username)}>Delete</button>
-                  )}
+              {joinRequests.map((request) => (
+                <li key={request.id}>
+                  {request.username} wants to join
+                  <button onClick={() => handleAcceptRequest(request.id)}>Accept</button>
+                  <button onClick={() => handleDeleteRequest(request.id)}>Reject</button>
                 </li>
               ))}
             </ul>
           </div>
-        </>
-      )}
-    </div>
+        )}
+        <div>
+          <h2>Group Users</h2>
+          <ul>
+            {groupUsers.map((user) => (
+              <li key={user.username}>
+                {user.username}
+                {isCurrentUserOwner && (
+                  <button onClick={() => handleDeleteUser(user.username)}>Delete</button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </>
+    )}
+  </div>
   );
 };
 
-export { GroupPage };

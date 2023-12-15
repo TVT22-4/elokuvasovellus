@@ -3,12 +3,13 @@ import './App.css';
 //import { LoginContext } from './components/Context';
 import { LoginPage } from './components/Login';
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import { UserData } from './components/User';
+import UserData from './components/User';
 import RegisterForm  from './components/Register';
 import GroupList from './components/Group';
 import CreateGroup from './components/CreateGroup';
-import { GroupPage } from './components/GroupPage';
-
+import GroupPage from './components/GroupPage';
+import NewsFin from './components/Xml';
+import FetchNews from './components/FetchNews';
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
         <Route path="/group" element={<Group />} />
-        <Route path="/group/:idGroup" element={<GroupPage />} />
+        <Route path="/group/:idGroup" element={<GroupAndNewsPage />} />
         <Route path="/*" element={ <h3>Page not found</h3>} />
       </Routes>
     </div>
@@ -86,11 +87,18 @@ function Group(){
     <div>
       <GroupList />
       <CreateGroup />
-      
     </div>
   )
 }
 
-
+function GroupAndNewsPage() {
+  return (
+    <>
+      <GroupPage />
+      <NewsFin />
+      <FetchNews />
+    </>
+  );
+}
 
 export default App;

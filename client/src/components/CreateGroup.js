@@ -20,7 +20,7 @@ export default function CreateGroup() {
 
   return (
     <div className="form">
-        <h2>Crete group</h2>
+        <h2>Create group</h2>
         <form>
         <p>Group name</p>
       <input value={groupname} onChange={e => setGroupname(e.target.value)} /><br />

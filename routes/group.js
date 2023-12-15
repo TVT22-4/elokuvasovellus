@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
-const axios = require('axios');
-var xml2js = require('xml2js');
 const {createToken, auth, authorizeGroup } = require('../auth/auth');
 
 
@@ -101,48 +99,30 @@ router.post('/group/:idGroup/users', auth, async (req, res) => {
   });
   
 
-
-/*async function fetchData(area, categoryID, eventID) {
-  try {
-    const response = await axios.get(`https://www.finnkino.fi/xml/News/?area=${area}&categoryID=${categoryID}&eventID=${eventID}`);
-
-    const xmlData = response.data;
-
-    const jsResult = await xml2js.parseStringPromise(xmlData);
-    
-    console.log(jsResult.News);
-    
-  } catch (error) {
-    console.error('Error fetching data:', error.message);
-  }
-}
-
-fetchData('1041', '', '123');*/
-
-
-router.post('/group/:idGroup/news/add-news', auth, async (req, res) => {
-    const { idGroup, area, categoryID, eventID } = req.body;
+router.post('/group/:idGroup/news/add-news', auth, authorizeGroup, async (req, res) => {
+  const idGroup = req.params.idGroup;
+  const title = req.body.selectedNews.Title[0];
+  const publishDate = req.body.selectedNews.PublishDate[0];
 
     try {
-        await addNews(idGroup, area, categoryID, eventID);
+        await addNews(idGroup, title, publishDate);
         res.end();
     } catch (error) {
-        console.log(error);
+        console.log(error.message)
         res.json({error: error.message}).status(500);
     }
 });
 
-router.get('/group/:idGroup/news', auth, async (req, res) => {
+router.get('/group/:idGroup/news', auth, authorizeGroup, async (req, res) => {
     const idGroup = req.params.idGroup;
-
     try {
-        res.json(await getNews(idGroup));    
+        res.json(await getNews(idGroup));
     } catch (error) {
         res.status(500).json({error: error.message});
     }
 });
 
-router.delete('/group/:idGroup/news/:materialID', auth, upload.none() , async (req,res) => {
+router.delete('/group/:idGroup/news/:materialID', auth, authorizeGroup, upload.none() , async (req,res) => {
     const materialID = req.params.materialID;
 
     try {

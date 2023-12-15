@@ -1,35 +1,50 @@
-import { useContext, useEffect, useState } from "react";
-import { LoginContext } from "./Context";
-import { jwtToken, userInfo } from "./Signals";
+import { useState } from "react";
 import axios from "axios";
+import { jwtToken } from "./Signals";
 
 function LoginPage() {
+  return (
+    <div>
+      {jwtToken.value.length === 0 ? (
+        <LoginForm />
+      ) : (
+        <div>
+          <h2>Welcome</h2>
+          <button onClick={() => jwtToken.value = ''}>Logout</button>
+        </div>
+      )}
+    </div>
+  );
+}
 
-    return (
-      <div>
-        { jwtToken.value.length === 0 ? <LoginForm/> : 
-          <button onClick={() => jwtToken.value = ''}>Logout</button>}
-      </div>
-    );
+function LoginForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  function login() {
+    setError(''); 
+
+    axios.postForm('http://localhost:3001/user/login', { username, password })
+      .then(resp => jwtToken.value = resp.data.jwtToken)
+      .catch(error => {
+        if (error.response && error.response.status === 401) {
+          setError('Incorrect username or password. Please try again.');
+        } else {
+          console.error('Error during login:', error.message);
+        }
+      });
   }
-  function LoginForm() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-  
-    function login(){
-      axios.postForm('http://localhost:3001/user/login', {username,password})
-        .then(resp => jwtToken.value = resp.data.jwtToken )
-        .catch(error => console.log(error.response.data))
-    }
-  
-    return (
-      <div>
-        <input value={username} onChange={e => setUsername(e.target.value)} /><br />
-        <input value={password} onChange={e => setPassword(e.target.value)} /><br />
-        <button onClick={login}>Login</button>
-      </div>
-    );
-  }
 
+  return (
+    <div>
+      <h2>Login</h2>
+      <input value={username} onChange={e => setUsername(e.target.value)} /><br />
+      <input type="password" value={password} onChange={e => setPassword(e.target.value)} /><br />
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button onClick={login}>Login</button>
+    </div>
+  );
+}
 
-export {LoginPage};
+export { LoginPage };

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const GroupList = () => {
+export default function GroupList() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,15 +44,14 @@ const GroupList = () => {
       ) : (
         <ul>
           {groups.map((group) => (
-          <li key={group.idGroup}>
-          {group.groupname} : {group.description}
-           <button onClick={() => handleJoinGroup(group.idGroup)}>Join Group</button>
-          </li>
+            <li key={group.idGroup}>
+              <Link to={`/group/${group.idGroup}`}>{group.groupname}</Link> <br /> {group.description}<br />
+               <button onClick={() => handleJoinGroup(group.idGroup)}>Join Group</button><br /><br />
+            </li>
           ))}
         </ul>
       )}
     </div>
   );
-};
+}
 
-export default GroupList;
