@@ -11,8 +11,6 @@ const searchRoute = require ('./routes/search');
 const upload = multer({dest: 'upload/'});
 const cors = require('cors');
 
-const app = express();
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
