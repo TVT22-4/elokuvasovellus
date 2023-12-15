@@ -4,6 +4,7 @@ const upload = multer({ dest: 'upload/' });
 const axios = require('axios');
 
 
+
 const accessToken = process.env.ACCESS_TOKEN;
 
 // Endpoint for searching movies and series
@@ -31,6 +32,7 @@ router.get('/search', upload.none(), async function (req, res) {
             targetId: item.id,
             title: item.title || item.name,
             type: item.media_type === 'movie' ? 'movie' : 'series',
+            poster_path: item.poster_path,
         }));
 
         // Filter content based on search criteria
