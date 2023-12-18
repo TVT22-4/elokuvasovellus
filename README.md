@@ -23,7 +23,7 @@ Projektia on kehitetty Visual Studio Code -kehitysympäristössä. Projektin bac
 
 ## Vastuualueet
 
-Vilma Vuorma: Vastasin projektissa kaikesta mitä ryhmän toteutukseen sisältyy, eli ryhmän sivujen backendin ja frontendin toteuttamisesta sekä REST API:n dokumentaatiosta. Lisäksi vastasin käyttäjän backendistä ja frontendistä sekä REST API:n dokumentaatiosta. Käyttäjän käyttöliittymän ulkoasun suunnittelusta kaikki ryhmän jäsenet olivat vastuussa. Lisäksi osallistuin esittelytekstin kirjoittamiseen ja testikoodin tekemiseen.
+Vilma Vuorma: Vastasin projektissa kaikesta mitä ryhmän toteutukseen sisältyy, eli ryhmän sivujen backendin ja frontendin toteuttamisesta sekä REST API:n dokumentaatiosta. Lisäksi vastasin käyttäjän backendistä ja frontendistä sekä REST API:n dokumentaatiosta. Sivuston käyttöliittymän ulkoasun suunnittelusta kaikki ryhmän jäsenet olivat vastuussa. Lisäksi osallistuin esittelytekstin kirjoittamiseen ja testikoodin tekemiseen.
 
 Dicle Tasdemir: Vastuualueisiini kuului arvostelujen lisääminen ja selaaminen sekä backendin että frontendin puolella. Tämän lisäksi loin Postgre -yhteyden, minkä avulla lähdettiin työstämään tietokantaa. Lisäksi tein arvosteluikkunan ulkonäköä ja sen asettelua. Teimme kaikki myös testikoodia, sivuston ulkoasua sekä esittelytekstiä.
 
