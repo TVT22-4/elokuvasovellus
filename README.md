@@ -45,12 +45,13 @@ Laura Viide: Vastuualueeni kohdistuivat käyttäjän henkilökohtaisen sivun luo
 *Kuva 2. Rekisteröinnin näkymä*
 
 
-<img width="950" alt="review" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/fadf15c8-c845-43f9-8bf1-857a62db677d">
+<img width="953" alt="Näyttökuva 2023-12-18 132333" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/ea181118-115e-4d0a-a959-a0c9b0ad813f">
 
 *Kuva 3. Arvosteluiden näkymä*
 
 
-<img width="950" alt="watchlist" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/00d7d393-b12d-4852-9b02-c7e10bde339b">
+<img width="947" alt="Näyttökuva 2023-12-18 132223" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/9f3ee1e8-b899-42ca-83f6-3670526613ee">
+
 
 *Kuva 4. Katselulistan näkymä*
 
