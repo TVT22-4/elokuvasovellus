@@ -13,6 +13,7 @@ Projekti on tehty Oulun ammattikorkeakoulun toisen vuoden Web-ohjelmoinnin sovel
 ## Toiminnallisuudet
 
 Sovellus mahdollistaa käyttäjän luomisen antamalla käyttäjätunnuksen ja salasanan. Jokaisen käyttäjän käyttäjätunnus on uniikki, ja käyttäjätunnuksella sekä salasanalla kirjaudutaan sisälle sovellukseen. Käyttäjän on mahdollista poistaa omat tunnuksensa. Sovelluksessa on myös mahdollista hakea elokuvia ja sarjoja suodatuksilla. Kirjautunut käyttäjä voi kustomoida oman näkymänsä elokuvien ja sarjojen lisäämisellä omalle sivullensa.
+
 Sovellukseen kirjautunut käyttäjä voi luoda ryhmän haluamallaan nimellä. Ryhmän näkymän saa näkyviin vain ryhmän jäsenet. Ryhmiä voidaan kuitenkin selata kirjautumatta, jolloin vain ryhmien nimet ja kuvaukset näkyvät. Kirjautuneet käyttäjät voivat lähettää ryhmiin liittymispyyntöjä, joita vain ryhmän omistaja voi hyväksyä. Lisäksi vain ryhmän omistaja voi poistaa ryhmän jäseniä. Ryhmän jäsenillä on mahdollisuus lisätä Finnkinon XML -palvelusta uutisia ryhmän sivulle.
 Kirjautunut käyttäjä voi lisätä sovellukseen elokuva-arvostelun. Arvostelussa näkyy käyttäjän nimimerkki, arvostelu, elokuvan ID ja arvosana. Elokuva-arvosteluja on mahdollista selata kirjautumatta.
 Teknologiat
@@ -33,7 +34,7 @@ Laura Viide: Vastuualueeni kohdistuivat käyttäjän henkilökohtaisen sivun luo
 <img width="707" alt="er" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/00f38d46-91fa-4c7e-a548-92880767b24b">
 
  
-Kuva 1. ER-kaavio
+*Kuva 1. ER-kaavio*
 
 
 ## Sovelluksen ulkoasu
@@ -41,15 +42,15 @@ Kuva 1. ER-kaavio
 
 <img width="859" alt="register" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/641ac574-b386-42a4-81af-f330f7ded14a">
 
-Kuva 2. Rekisteröinnin näkymä
+*Kuva 2. Rekisteröinnin näkymä*
 
 
 <img width="950" alt="review" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/fadf15c8-c845-43f9-8bf1-857a62db677d">
 
-Kuva 3. Arvosteluiden näkymä
+*Kuva 3. Arvosteluiden näkymä*
 
 
 <img width="950" alt="watchlist" src="https://github.com/TVT22-4/elokuvasovellus/assets/112632790/00d7d393-b12d-4852-9b02-c7e10bde339b">
 
-Kuva 4. Katselulistan näkymä
+*Kuva 4. Katselulistan näkymä*
 
