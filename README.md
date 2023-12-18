@@ -16,7 +16,8 @@ Sovellus mahdollistaa käyttäjän luomisen antamalla käyttäjätunnuksen ja sa
 
 Sovellukseen kirjautunut käyttäjä voi luoda ryhmän haluamallaan nimellä. Ryhmän näkymän saa näkyviin vain ryhmän jäsenet. Ryhmiä voidaan kuitenkin selata kirjautumatta, jolloin vain ryhmien nimet ja kuvaukset näkyvät. Kirjautuneet käyttäjät voivat lähettää ryhmiin liittymispyyntöjä, joita vain ryhmän omistaja voi hyväksyä. Lisäksi vain ryhmän omistaja voi poistaa ryhmän jäseniä. Ryhmän jäsenillä on mahdollisuus lisätä Finnkinon XML -palvelusta uutisia ryhmän sivulle.
 Kirjautunut käyttäjä voi lisätä sovellukseen elokuva-arvostelun. Arvostelussa näkyy käyttäjän nimimerkki, arvostelu, elokuvan ID ja arvosana. Elokuva-arvosteluja on mahdollista selata kirjautumatta.
-Teknologiat
+
+## Teknologiat
 
 Projektia on kehitetty Visual Studio Code -kehitysympäristössä. Projektin backend on luotu JavaScriptillä sekä Node.js:llä. Frontend on luotu Reactilla. Tietokanta toteutettiin PostgreSQL-ohjelmalla. REST API:n dokumentaatio on luotu Postman-sovelluksella ja UI-suunnitelma sekä ER-kaavio on luotu draw.io-sovelluksella. Versiohallinta toteutettiin GitHub-ympäristöllä, jossa käytimme myös projektisuunnitteluun Kanban-taulukkoa.
 
