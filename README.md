@@ -19,7 +19,7 @@ Kirjautunut käyttäjä voi lisätä sovellukseen elokuva-arvostelun. Arvostelus
 
 ## Teknologiat
 
-Projektia on kehitetty Visual Studio Code -kehitysympäristössä. Projektin backend on luotu JavaScriptillä sekä Node.js:llä. Frontend on luotu Reactilla. Tietokanta toteutettiin PostgreSQL-ohjelmalla. REST API:n dokumentaatio on luotu Postman-sovelluksella ja UI-suunnitelma sekä ER-kaavio on luotu draw.io-sovelluksella. Versiohallinta toteutettiin GitHub-ympäristöllä, jossa käytimme myös projektisuunnitteluun Kanban-taulukkoa.
+Projektia on kehitetty Visual Studio Code -kehitysympäristössä. Projektin backend on luotu Node.js:llä. Frontend on luotu Reactilla. Tietokanta toteutettiin PostgreSQL-ohjelmalla. REST API:n dokumentaatio on luotu Postman-sovelluksella ja UI-suunnitelma sekä ER-kaavio on luotu draw.io-sovelluksella. Versiohallinta toteutettiin GitHub-ympäristöllä, jossa käytimme myös projektisuunnitteluun Kanban-taulukkoa.
 
 ## Vastuualueet
 
